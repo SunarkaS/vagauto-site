@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAG Club SPB — специализированный сервис Volkswagen, Audi, Skoda в Петербурге</title>
+<meta name="description" content="Специализированный автосервис VAG в Приморском районе Санкт-Петербурга. ТО, диагностика и ремонт Volkswagen, Audi, Skoda, Porsche. Мебельная ул., 2Б. Рейтинг 5,0 — 127 отзывов.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0c0f; --panel:#12161c; --panel-2:#171c24; --line:rgba(255,255,255,.09);
+    --text:#eef1f5; --muted:#98a2b3; --accent:#2f7cf6; --accent-2:#61a3ff; --gold:#d8b26a;
+    --radius:14px; --max:1240px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+  h2{font-family:'Oswald',sans-serif;font-size:clamp(28px,3.4vw,44px);line-height:1.1;text-transform:uppercase;letter-spacing:.02em;font-weight:600}
+  .lead{color:var(--muted);font-size:17px;max-width:640px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:10px;font-weight:700;font-size:15px;border:1px solid transparent;cursor:pointer;transition:.25s}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 30px rgba(47,124,246,.28)}
+  .btn-primary:hover{background:#3d88ff;transform:translateY(-2px)}
+  .btn-ghost{border-color:rgba(255,255,255,.22);color:#fff}
+  .btn-ghost:hover{background:rgba(255,255,255,.08)}
+
+  /* HEADER */
+  header{position:fixed;inset:0 0 auto 0;z-index:100;transition:.3s;border-bottom:1px solid transparent}
+  header.solid{background:rgba(10,12,15,.88);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Oswald',sans-serif;font-size:21px;letter-spacing:.06em;font-weight:600}
+  .logo b{color:var(--accent)}
+  .logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(140deg,var(--accent),#12489c);display:grid;place-items:center;font-size:15px;font-weight:800;letter-spacing:0}
+  .menu{display:flex;gap:28px;font-size:14.5px;font-weight:600}
+  .menu a{color:var(--muted);transition:.2s}
+  .menu a:hover{color:#fff}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .nav-phone{font-weight:700;font-size:15.5px;white-space:nowrap}
+  .nav-phone:hover{color:var(--accent-2)}
+  .nav .btn{padding:12px 20px;font-size:14px}
+
+  /* HERO */
+  .hero{position:relative;min-height:min(88vh,760px);display:flex;align-items:flex-end;padding:150px 0 64px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);animation:zoom 24s ease-in-out infinite alternate}
+  @keyframes zoom{to{transform:scale(1.12)}}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,13,.86) 0%,rgba(8,10,13,.55) 42%,rgba(8,10,13,.96) 100%)}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .hero h1{font-family:'Oswald',sans-serif;text-transform:uppercase;font-size:clamp(38px,6.2vw,76px);line-height:.98;letter-spacing:.01em;margin:18px 0 22px;max-width:15ch}
+  .hero h1 em{font-style:normal;color:var(--accent-2)}
+  .hero .lead{font-size:19px;max-width:560px;color:#c7cfdb}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .rating-pill{display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:9px 16px 9px 10px;border-radius:100px;backdrop-filter:blur(8px);font-size:14px}
+  .rating-pill b{font-size:16px}
+  .rating-pill .score{background:var(--gold);color:#1a1405;font-weight:800;border-radius:100px;padding:4px 10px;font-size:14px}
+  .hero-facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:36px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12);font-size:14px;color:#b8c2d0}
+  .hero-facts span{display:flex;align-items:center;gap:8px}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-2)}
+
+  /* SECTIONS */
+  section{padding:88px 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:40px;flex-wrap:wrap}
+  .sec-head h2{margin-top:10px}
+
+  /* ADVANTAGES */
+  .adv{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .adv-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+  .adv-card .num{font-family:'Oswald',sans-serif;font-size:34px;color:var(--accent);line-height:1;margin-bottom:14px}
+  .adv-card h3{font-size:16px;margin-bottom:8px}
+  .adv-card p{font-size:14px;color:var(--muted)}
+
+  /* SERVICES */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .svc{background:linear-gradient(160deg,var(--panel-2),var(--panel));border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;transition:.3s}
+  .svc:hover{transform:translateY(-4px);border-color:rgba(47,124,246,.45)}
+  .svc .ico{font-size:26px;margin-bottom:16px}
+  .svc h3{font-size:18px;margin-bottom:8px}
+  .svc p{font-size:14px;color:var(--muted);margin-bottom:18px;min-height:44px}
+  .svc .price{font-family:'Oswald',sans-serif;font-size:22px;color:#fff;padding-top:16px;border-top:1px solid var(--line)}
+  .svc .price small{font-size:12px;color:var(--muted);font-family:'Manrope';margin-left:6px}
+
+  /* PRICE TABS */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .tab{padding:11px 20px;border-radius:100px;border:1px solid var(--line);background:transparent;color:var(--muted);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.2s}
+  .tab:hover{color:#fff;border-color:rgba(255,255,255,.25)}
+  .tab.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .price-list{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:10px 28px}
+  .price-row{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .price-row:last-child{border-bottom:none}
+  .price-row span:last-child{white-space:nowrap;font-weight:700;color:#fff}
+  .price-note{margin-top:16px;font-size:13px;color:var(--muted)}
+  .pane{display:none}
+  .pane.on{display:grid}
+
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .gallery a{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/3;background:var(--panel)}
+  .gallery img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .gallery a:hover img{transform:scale(1.06)}
+  .gallery a:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+
+  /* REVIEWS */
+  .reviews{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .rev{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column}
+  .rev-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .rev-ava{width:52px;height:52px;border-radius:50%;object-fit:cover;background:var(--panel-2);border:1px solid var(--line)}
+  .rev-name{font-weight:700;font-size:15.5px}
+  .rev-meta{font-size:12.5px;color:var(--muted)}
+  .rev-stars{color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:10px}
+  .rev-text{font-size:14.5px;color:#c9d2e0;flex:1}
+  .rev-text.clamp{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+  .rev-photos{display:flex;gap:8px;margin-top:16px}
+  .rev-photos img{width:88px;height:66px;object-fit:cover;border-radius:8px;cursor:pointer;border:1px solid var(--line)}
+  .rev-more{margin-top:12px;background:none;border:none;color:var(--accent-2);font-family:inherit;font-size:13.5px;font-weight:600;cursor:pointer;padding:0;text-align:left}
+  .rev-sum{display:flex;align-items:center;gap:18px;margin-bottom:34px;flex-wrap:wrap}
+  .rev-sum .big{font-family:'Oswald',sans-serif;font-size:52px;line-height:1}
+  .rev-sum .stars-big{color:var(--gold);font-size:18px;letter-spacing:3px}
+
+  /* MAP / CONTACTS */
+  .map-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel)}
+  .map-wrap iframe{width:100%;height:520px;border:0;filter:grayscale(.25) contrast(1.05)}
+  .contacts{padding:38px}
+  .contacts h3{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+  .contacts h3:first-child{margin-top:0}
+  .contacts .big{font-size:24px;font-weight:800}
+  .contacts .big a:hover{color:var(--accent-2)}
+  .contacts p{color:#c9d2e0;font-size:15px}
+  .socials{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+  .socials a{padding:10px 18px;border:1px solid var(--line);border-radius:100px;font-size:13.5px;font-weight:600;transition:.2s}
+  .socials a:hover{border-color:var(--accent);color:var(--accent-2)}
+
+  /* CTA */
+  .cta{background:linear-gradient(120deg,#11213c,#0a0c0f 62%);border:1px solid var(--line);border-radius:20px;padding:52px;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap}
+  .cta h2{max-width:18ch}
+  .cta p{color:var(--muted);margin-top:10px}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line);padding:44px 0 34px;color:var(--muted);font-size:14px}
+  .foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:center}
+  .foot-note{margin-top:22px;font-size:12.5px;color:#6d788a;max-width:900px}
+
+  /* MODAL */
+  .overlay{position:fixed;inset:0;background:rgba(4,6,9,.78);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}
+  .overlay.on{display:flex}
+  .modal{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:38px;max-width:460px;width:100%;position:relative}
+  .modal h3{font-family:'Oswald',sans-serif;font-size:26px;text-transform:uppercase;margin-bottom:8px}
+  .modal p{color:var(--muted);font-size:14.5px;margin-bottom:22px}
+  .modal input,.modal select{width:100%;padding:14px 16px;margin-bottom:12px;border-radius:10px;border:1px solid var(--line);background:#0d1117;color:var(--text);font-family:inherit;font-size:15px}
+  .modal input:focus,.modal select:focus{outline:none;border-color:var(--accent)}
+  .modal .btn{width:100%;justify-content:center;margin-top:6px}
+  .close{position:absolute;top:14px;right:18px;background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1}
+  .close:hover{color:#fff}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:.7s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:1024px){
+    .adv{grid-template-columns:repeat(2,1fr)}
+    .services{grid-template-columns:repeat(2,1fr)}
+    .gallery{grid-template-columns:repeat(3,1fr)}
+    .map-wrap{grid-template-columns:1fr}
+    .map-wrap iframe{height:380px}
+  }
+  @media(max-width:760px){
+    .menu{display:none}
+    .nav-phone{display:none}
+    .services,.adv,.reviews{grid-template-columns:1fr}
+    .price-list{grid-template-columns:1fr;padding:6px 20px}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .gallery a:first-child{grid-column:span 2;grid-row:auto;aspect-ratio:4/3}
+    section{padding:60px 0}
+    .cta{padding:32px}
+    .contacts{padding:26px}
+    .modal{padding:26px}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap nav">
+    <a href="#top" class="logo"><span class="logo-mark">VW</span>VAG <b>CLUB</b> SPB</a>
+    <nav class="menu">
+      <a href="#services">Услуги</a>
+      <a href="#prices">Цены</a>
+      <a href="#works">Работы</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="nav-right">
+      <a href="tel:+79955979000" class="nav-phone">+7 (995) 597-90-00</a>
+      <button class="btn btn-primary" onclick="openModal()">Записаться</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-bg" style="background-image:url('https://avatars.mds.yandex.net/get-altay/18111423/2a0000019e1ccba2cf5bc3d36064d2ddbad2/XXL')"></div>
+  <div class="wrap">
+    <div class="eyebrow">Приморский район · Мебельная ул., 2Б</div>
+    <h1>Сервис <em>VAG</em> без компромиссов</h1>
+    <p class="lead">Специализированный автосервис по Volkswagen, Audi, Skoda и Porsche. Только эти марки — поэтому знаем их слабые места, а не учимся на вашей машине.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="openModal()">Записаться на сервис</button>
+      <a class="btn btn-ghost" href="#prices">Смотреть цены</a>
+    </div>
+    <div class="hero-facts">
+      <span><i class="dot"></i>пн-пт 10:00–20:00</span>
+      <span><i class="dot"></i>м. Старая Деревня, 440 м</span>
+      <span><i class="dot"></i>Оплата картой · Wi-Fi · предзапись</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="adv reveal">
+      <div class="adv-card">
+        <div class="num">5</div>
+        <h3>Рейтинг на Яндекс.Картах</h3>
+        <p>127 отзывов и 248 оценок. Награда «Хорошее место 2026».</p>
+      </div>
+      <div class="adv-card">
+        <div class="num">VAG</div>
+        <h3>Только эти марки</h3>
+        <p>Volkswagen, Audi, Skoda, Porsche. Профильное оборудование и доступ к оригинальным каталогам.</p>
+      </div>
+      <div class="adv-card">
+        <div class="num">1 860 ₽</div>
+        <h3>Нормочас от</h3>
+        <p>Прозрачная стоимость работ до начала ремонта: 1 860–2 860 ₽ за нормочас.</p>
+      </div>
+      <div class="adv-card">
+        <div class="num">Склад</div>
+        <h3>Запчасти в наличии</h3>
+        <p>Ходовые расходники и агрегаты на складе — не ждём поставку неделю.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow">Что делаем</div>
+        <h2>Услуги сервиса</h2>
+      </div>
+      <p class="lead" style="margin:0">Полный цикл: от планового ТО до агрегатного ремонта двигателя и DSG.</p>
+    </div>
+    <div class="services">
+      
+      <div class="svc reveal">
+        <div class="ico">🛠</div>
+        <h3>ТО по регламенту</h3>
+        <p>Замена масла, фильтров, свечей. Только оригинал или проверенные аналоги.</p>
+        <div class="price">от 2 910 ₽</div>
+      </div>
+      <div class="svc reveal">
+        <div class="ico">⚙️</div>
+        <h3>Замена ремня ГРМ</h3>
+        <p>Комплектом с помпой и роликами. Двигатели 1,4 TSI, 2,0 TDI, EA888.</p>
+        <div class="price">от 8 350 ₽</div>
+      </div>
+      <div class="svc reveal">
+        <div class="ico">🛞</div>
+        <h3>Тормозная система</h3>
+        <p>Диски, колодки, жидкость, суппорты. С контролем толщины и биения.</p>
+        <div class="price">от 2 960 ₽</div>
+      </div>
+      <div class="svc reveal">
+        <div class="ico">💻</div>
+        <h3>Диагностика</h3>
+        <p>Компьютерная, по ошибкам и адаптациям, плюс осмотр на подъёмнике.</p>
+        <div class="price">от 880 ₽</div>
+      </div>
+      <div class="svc reveal">
+        <div class="ico">🔧</div>
+        <h3>Подвеска</h3>
+        <p>Сайлентблоки, рычаги, амортизаторы, ступичные подшипники.</p>
+        <div class="price">от 21 440 ₽</div>
+      </div>
+      <div class="svc reveal">
+        <div class="ico">❄️</div>
+        <h3>Кондиционер</h3>
+        <p>Заправка, поиск утечек, ремонт компрессора и радиатора.</p>
+        <div class="price">3 400 ₽</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prices" style="background:#0c0f13">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow">Прайс-лист</div>
+        <h2>Цены на работы</h2>
+      </div>
+      <p class="lead" style="margin:0">Актуальные цены из карточки сервиса. Точную смету называем после осмотра.</p>
+    </div>
+    <div class="tabs" id="tabs">
+      <button class="tab on" data-i="0">Ремонт</button><button class="tab" data-i="1">Услуга</button><button class="tab" data-i="2">Ремонт Audi</button><button class="tab" data-i="3">Ремонт Skoda</button><button class="tab" data-i="4">Ремонт Volkswagen</button>
+    </div>
+    <div id="panes">
+      
+      <div class="price-list pane on" data-i="0">
+        <div class="price-row"><span>Автосервис Фольксваген Шкода.</span><span>1000 ₽</span></div><div class="price-row"><span>Ремонт и обслуживание коммерческих автомобилей Фольксваген.</span><span>1000 ₽</span></div><div class="price-row"><span>Ремонт подвески автомобиля</span><span>21440 ₽</span></div><div class="price-row"><span>Усиленные сайлентблоки передних рычагов для VW T5, T6</span><span>1940 ₽</span></div><div class="price-row"><span>Кронштейн для ремонта зеркала VW T5 T6 Amarok</span><span>1200 ₽</span></div><div class="price-row"><span>Оригинальный комплект ремня грм для VW Multivan T6</span><span>25880 ₽</span></div><div class="price-row"><span>Реле свечей накала Volkswagen 0281003085</span><span>10880 ₽</span></div><div class="price-row"><span>Шкив насоса гидроусилителя Фольксваген Т5, Т6 06H145255F</span><span>4240 ₽</span></div><div class="price-row"><span>Подшипник ступицы Фольксваген Транспортер Т5, Т6 713610760</span><span>11030 ₽</span></div><div class="price-row"><span>Комплект ремня грм для Фольксваген Т5 2,0TDI 03L198119F</span><span>34950 ₽</span></div><div class="price-row"><span>Комплект ремня грм с помпой Tiguan, Kodiaq, Passat</span><span>28720 ₽</span></div><div class="price-row"><span>Оригинальная помпа системы охлаждения Volkswagen 2,0TDI</span><span>24810 ₽</span></div>
+      </div>
+      <div class="price-list pane" data-i="1">
+        <div class="price-row"><span>Мойка радиаторов системы охлаждения</span><span>16800 ₽</span></div><div class="price-row"><span>Замена масла и фильтров Volkswagen Multivan</span><span>2910 ₽</span></div><div class="price-row"><span>Замена масла и фильтров Skoda Octavia A7</span><span>2940 ₽</span></div><div class="price-row"><span>Замена масла и фильтров Skoda Karoq</span><span>2940 ₽</span></div><div class="price-row"><span>Замена масла и фильтров Skoda Kodiaq</span><span>2940 ₽</span></div><div class="price-row"><span>Замена масла и фильтров Skoda Yeti</span><span>2940 ₽</span></div><div class="price-row"><span>Замена тормозных дисков Шкода Кодиак</span><span>2960 ₽</span></div><div class="price-row"><span>Замена помпы системы охлаждения двигателей 1,8 2,0 TFSI EA888 Gen3</span><span>8860 ₽</span></div><div class="price-row"><span>Замена ремня ГРМ 1,4TFSI</span><span>8350 ₽</span></div><div class="price-row"><span>Заправка кондиционера</span><span>3400 ₽</span></div><div class="price-row"><span>Замена ремня ГРМ 2,0TDI Tiguan, Amarok, Т5, Superb, Kodiaq, Q3, Q5</span><span>12400 ₽</span></div><div class="price-row"><span>Диагностика системы охлаждения-отопления</span><span>880 ₽</span></div>
+      </div>
+      <div class="price-list pane" data-i="2">
+        <div class="price-row"><span>ТО и Ремонт Audi Q2</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi A8</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi Q8</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi A4</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi A3</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi A1</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi A6</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi A5</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi Q5</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi Q3</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi Q7</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Audi A7</span><span>1280 ₽</span></div>
+      </div>
+      <div class="price-list pane" data-i="3">
+        <div class="price-row"><span>ТО и Ремонт Skoda Kamiq</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Yeti</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda SuperB</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Rapid</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Octavia</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Kodiaq</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Karoq</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Fabia</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Kamiq</span><span>3730 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Yeti</span><span>3730 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda SuperB</span><span>3730 ₽</span></div><div class="price-row"><span>ТО и Ремонт Skoda Rapid</span><span>3400 ₽</span></div>
+      </div>
+      <div class="price-list pane" data-i="4">
+        <div class="price-row"><span>ТО и Ремонт VW Tiguan X</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Passat CC</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Tiguan L Pro</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Tayron</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Tavendor</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW UP</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Beetle</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Taos</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Sirocco</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Touran</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Arteon</span><span>1280 ₽</span></div><div class="price-row"><span>ТО и Ремонт VW Amarok</span><span>1280 ₽</span></div>
+      </div>
+    </div>
+    <p class="price-note">Цены носят информационный характер и не являются публичной офертой. Полный прайс — в карточке на Яндекс.Картах.</p>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow">Как выглядит</div>
+        <h2>Наш сервис</h2>
+      </div>
+      <p class="lead" style="margin:0">Подъёмники, диагностика, зона ожидания. Фото — из карточки сервиса.</p>
+    </div>
+    <div class="gallery reveal">
+      <a href="https://avatars.mds.yandex.net/get-altay/18111423/2a0000019e1ccba2cf5bc3d36064d2ddbad2/XXL" target="_blank" rel="noopener"><img src="https://avatars.mds.yandex.net/get-altay/18111423/2a0000019e1ccba2cf5bc3d36064d2ddbad2/L" alt="Фото сервиса VAG Club 1" loading="lazy"></a><a href="https://avatars.mds.yandex.net/get-altay/20967380/2a000001a01f9f50be832c824b5262acac4d/XXL" target="_blank" rel="noopener"><img src="https://avatars.mds.yandex.net/get-altay/20967380/2a000001a01f9f50be832c824b5262acac4d/L" alt="Фото сервиса VAG Club 2" loading="lazy"></a><a href="https://avatars.mds.yandex.net/get-altay/15696528/2a000001a01fb217b99115b1eb77d061e22c/XXL" target="_blank" rel="noopener"><img src="https://avatars.mds.yandex.net/get-altay/15696528/2a000001a01fb217b99115b1eb77d061e22c/L" alt="Фото сервиса VAG Club 3" loading="lazy"></a><a href="https://avatars.mds.yandex.net/get-altay/20009069/2a000001a01f9f4b56751a25ec3e97b3273b/XXL" target="_blank" rel="noopener"><img src="https://avatars.mds.yandex.net/get-altay/20009069/2a000001a01f9f4b56751a25ec3e97b3273b/L" alt="Фото сервиса VAG Club 4" loading="lazy"></a><a href="https://avatars.mds.yandex.net/get-altay/20478540/2a000001a01fb530b256f8c6e065bfb2072c/XXL" target="_blank" rel="noopener"><img src="https://avatars.mds.yandex.net/get-altay/20478540/2a000001a01fb530b256f8c6e065bfb2072c/L" alt="Фото сервиса VAG Club 5" loading="lazy"></a><a href="https://avatars.mds.yandex.net/get-altay/20009069/2a000001a01fb44b84a2c0ab0ad8e11e5f43/XXL" target="_blank" rel="noopener"><img src="https://avatars.mds.yandex.net/get-altay/20009069/2a000001a01fb44b84a2c0ab0ad8e11e5f43/L" alt="Фото сервиса VAG Club 6" loading="lazy"></a><a href="https://avatars.mds.yandex.net/get-altay/20307657/2a000001a01fb53788dba7cd59ccbbf30a26/XXL" target="_blank" rel="noopener"><img src="https://avatars.mds.yandex.net/get-altay/20307657/2a000001a01fb53788dba7cd59ccbbf30a26/L" alt="Фото сервиса VAG Club 7" loading="lazy"></a><a href="https://avatars.mds.yandex.net/get-altay/21221165/2a000001a01f9f49262dfdb2ebd15c40f033/XXL" target="_blank" rel="noopener"><img src="https://avatars.mds.yandex.net/get-altay/21221165/2a000001a01f9f49262dfdb2ebd15c40f033/L" alt="Фото сервиса VAG Club 8" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" style="background:#0c0f13">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow">Что говорят</div>
+        <h2>Отзывы клиентов</h2>
+      </div>
+      <div class="rev-sum">
+        <div class="big">5</div>
+        <div>
+          <div class="stars-big">★★★★★</div>
+          <div class="rev-meta">127 отзывов на Яндекс.Картах</div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews">
+      
+      <article class="rev reveal">
+        <div class="rev-top">
+          <img class="rev-ava" src="https://avatars.mds.yandex.net/get-yapic/26311/0u-1/100x100" alt="Семён Казанцев" loading="lazy" onerror="this.style.visibility='hidden'">
+          <div>
+            <div class="rev-name">Семён Казанцев</div>
+            <div class="rev-meta">Знаток города 12 уровня · 10.07.2023</div>
+          </div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text clamp" id="rt0">Был здесь сначала на замене масла, затем производили мойку радиаторов и замену задних тормозных дисков на Golf 6.
+Действительно хороший сервис с ответственным подходом к работе. Никаких замечаний не выявил: можно было присутствовать при ремонте, на все мои вопросы мастер давал ответ. 
+Цены не гнут, в отличие от именитых сервисов в СПб, выдают полноценный заказ-наряд с чеком, можно оплатить картой. 
+
+Обязательно приеду ещё, спасибо!</p>
+        <button class="rev-more" onclick="toggleRev(0, this)">Читать полностью</button>
+        <div class="rev-photos"><img src="https://avatars.mds.yandex.net/get-altay/9720991/2a00000189412e1b43b582b21ae246c022f2/M" alt="Фото из отзыва" loading="lazy"><img src="https://avatars.mds.yandex.net/get-altay/9749133/2a00000189412e25781b58df08ee146d6c78/M" alt="Фото из отзыва" loading="lazy"></div>
+      </article>
+      <article class="rev reveal">
+        <div class="rev-top">
+          <img class="rev-ava" src="https://avatars.mds.yandex.net/get-yapic/53031/qL8bAJSzRWM2XopxpHcGO7f8s-1/100x100" alt="Михаил Коптяев" loading="lazy" onerror="this.style.visibility='hidden'">
+          <div>
+            <div class="rev-name">Михаил Коптяев</div>
+            <div class="rev-meta">Знаток города 5 уровня · 25.02.2022</div>
+          </div>
+        </div>
+        <div class="rev-stars">★★☆☆☆</div>
+        <p class="rev-text clamp" id="rt1">Кто пишет эти отзывы? Родственники и друзья? 
+Из за недостатка времени обратился как обычный водитель со словами «с утра не завелась»
+Первый звонок от ребят был «метки ремня сбиты, надо менять» 
+Менять его и правда было пора. Поэтому дал согласие.
+Проходит еще день. Звонок. «Поменяли свечи, высоковольтники и крышку распределителя зажигания, она работает, ремень будем менять?»
+А как же метки? Как бы она завелась и работала. Ну менять все равно надо, раз уж в сервисе и комплект грм заказан.
+Машина для работы и неделю без одной из двух машин в электромонтажной бригаде тяжело. Но вот он приятный звонок - забирайте , готова.
+Соответственно машина уже на следующий день запланирована ехать на объект.
+Приезжаю - получаю заказ наряд, смотрю: свечи, провода, крышка, комплект грм и помпа. Спрашиваю : «а что антифриз не понадобился?»
+«Забыли дописать»
+Дописали, оплачиваю, сумма адекватная, прайс как у всех, все ок. 
+В шутку спрашиваю про гарантию до ворот, шуток не понимают, говорят полгода. 
+Выехал с территории, там уже стояла моя личная машина, с нее перегрузил игструмент, отъехал два перекрестка, хлопок и пар. 
+С кайфом думаю я. Звоню, говорю так и так вскипела, далее ответ «надо было прогреть и долить антифриз»
+Ну допустим я брату дал «поковырять» машину , отцу или тестю, может да, а тут «готово забирай»
+Ладно возвращаюсь, открываем капот - лопнул корпус термостата. Ясен красен может от старости, может стечение обстоятельств, может на старой помпе давление меньше было, и много чего еще, поэтому разговора о том что «извините, мы воздух не выгнали» не было. Ну я все понимаю. Спрашиваю, как дальше будем поступать? «Сейчас посмотрим наличие корпуса термостата, после загоним и поменяем»
+Расстроился, ни на кого не обозлился. Сижу жду.
+Спустя минут 15 говорят о том что есть в москве оригинал , с ухмылкой , может завтра приедет. Я спрашиваю неужели нет в городе? Что то еще пошерстили, нашли в евроавто похожий номер детали. Я говорю давайте съезжу но со старым термостатом чтобы сравнить. «Сейчас машину доделаем и закатим твою»
+Жду 10/20/30/40/50 минут 
+Одна машина выезжает, заезжает другая.
+Дело было вечером, делать было нечего.
+Никто никакой информации не дает, да-да нет-нет, ждать не ждать
+Позвонил в евро авто на соседней улице, где в наличии термостат, сказали приезжай сейчас поменяем.
+Сказал я поеду, никто не отреагировал.
+Евроавто термостат поменяли, воздух выгнали, машина в работе.
+С первоначальной задачей ребята справились, тем более не каждый сервиз берет старые машины(октавия 1999г)
+За это лайк, но с банальной заменой грм и просто общением с клиентом, не хамили не агрессирлвали, но 21 век, озвучить ситуацию порой можно, врать про метки ради ничего, ремень я бы так и так согласился менять,как мне потом сказали, когда спросил зачем врали - «исключить вариант, она бы и с сбитыми метками завелась» ОДИН зуб если бы покочил она бы работала как мтз, о чем речь, не первая моя машина.
+Никто ни в чем не виноват но правильно автосервисы делают когда отказываются браться, интерес к задаче важен в любой сфере. Ильдар АВТО-ПОДБОР респект.
+</p>
+        <button class="rev-more" onclick="toggleRev(1, this)">Читать полностью</button>
+        <div class="rev-photos"><img src="https://avatars.mds.yandex.net/get-altay/5491685/2a0000017f2d8e916e833b0c942f4200aadf/M" alt="Фото из отзыва" loading="lazy"></div>
+      </article>
+      <article class="rev reveal">
+        <div class="rev-top">
+          <img class="rev-ava" src="https://avatars.mds.yandex.net/get-yapic/45131/enc-edffd5b6e168ae858b072e173435195a7619d7828da80f26df37e09ebd669e63/100x100" alt="Космачев Михаил" loading="lazy" onerror="this.style.visibility='hidden'">
+          <div>
+            <div class="rev-name">Космачев Михаил</div>
+            <div class="rev-meta">Знаток города 4 уровня · 17.07.2026</div>
+          </div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text clamp" id="rt2">Отличный сервис, приятные грамотные мастера. Тигуан 2 начался масложор на пробеге в 60к, ещё по телефону сказали, что 90% маслосъёмные колпачки на выпускных клапанах, особенности двигателя CZPA. Работа сложная и кропотливая, сделали качественно и в срок. Ценник гуманный, сравнивал паралельно с тремя сервисами.  После замены масложор пропал полностью, так же ушли еле заметные вибрации. Через пару недель заметил следы антифриза на крышке двигателя, оказалось что был слегка надорван резиновый патрубок непосредственно у штуцера, без разговоров заменили трубку на оригинальную, замыли следы, продиагностировали лямду и контакты на которые попал антифриз. Денег не взяли, лишь пожелали хорошего вечера. Правильный профессиональный подход без крахоборства всегда окупится на дистанции. Далее  буду обслуживаться здесь и всем рекомендую данный сервис.</p>
+        <button class="rev-more" onclick="toggleRev(2, this)">Читать полностью</button>
+        <div class="rev-photos"><img src="https://avatars.mds.yandex.net/get-altay/20420873/2a0000019f6ead215680f07aebe9f2caef8a/M" alt="Фото из отзыва" loading="lazy"></div>
+      </article>
+      <article class="rev reveal">
+        <div class="rev-top">
+          <img class="rev-ava" src="https://avatars.mds.yandex.net/get-yapic/28439/9pOcvd2j4pfZdyq2rcLDqzVUzug-1/100x100" alt="Ян Б." loading="lazy" onerror="this.style.visibility='hidden'">
+          <div>
+            <div class="rev-name">Ян Б.</div>
+            <div class="rev-meta">Знаток города 4 уровня · 19.01.2026</div>
+          </div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text clamp" id="rt3">Не в первый раз обращаюсь к ребятам за помощью и уезжаю с исключительно приятным впечатлением. Настоящие профессионалы своего дела, которые грамотно подходят ко всем задачам. Очень круто, что несмотря на трудности с поставками сервис продолжает работать со штатными запчастями Vag. 
+Цены демократичные, а скорость работы приятно удивляет. Отдельный респект за приятную зону приёмки и доброжелательное общение с клиентами. Спасибо!🤝</p>
+        <button class="rev-more" onclick="toggleRev(3, this)">Читать полностью</button>
+        <div class="rev-photos"><img src="https://avatars.mds.yandex.net/get-altay/18150755/2a0000019bd69778411d03deb8b654c469b9/M" alt="Фото из отзыва" loading="lazy"></div>
+      </article>
+      <article class="rev reveal">
+        <div class="rev-top">
+          <img class="rev-ava" src="https://avatars.mds.yandex.net/get-yapic/39249/enc-af650dbfc6bb1a58315092999bf7c3d5c52d6ea523fa3ab639d5ebcc36f822ba/100x100" alt="Андрей Чирятьев" loading="lazy" onerror="this.style.visibility='hidden'">
+          <div>
+            <div class="rev-name">Андрей Чирятьев</div>
+            <div class="rev-meta">Знаток города 14 уровня · 16.08.2025</div>
+          </div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text clamp" id="rt4">Три года сотрудничаю с этими ребятами, когда они ещё на полиграфмашевском были. Всегда всё чётко, ответственно, пунктуально. 
+Ценник приятный, сотрудники внимательные.  Ничего &quot;специально&quot; не находят, разводом не занимаются. Расчет скидывают в вацапе, детали для ТО всегда в наличии. Масло и в двигатель и в коробку льют хорошее.</p>
+        <button class="rev-more" onclick="toggleRev(4, this)">Читать полностью</button>
+        <div class="rev-photos"><img src="https://avatars.mds.yandex.net/get-altay/14246212/2a00000198b2cddd4515a27873049962b862/M" alt="Фото из отзыва" loading="lazy"></div>
+      </article>
+      <article class="rev reveal">
+        <div class="rev-top">
+          <img class="rev-ava" src="https://avatars.mds.yandex.net/get-yapic/49368/oNqvFZzTaN7THfQ5bt9NgRjQs-1/100x100" alt="Наталья Ивакина" loading="lazy" onerror="this.style.visibility='hidden'">
+          <div>
+            <div class="rev-name">Наталья Ивакина</div>
+            <div class="rev-meta">Знаток города 5 уровня · 29.12.2025</div>
+          </div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text clamp" id="rt5">Ремонтирую у Валерия машину уже на протяжении лет 15, не меньше. Лучший и честный мастер своего дела, идеальное отношение к клиентам и кристальная чистота везде, как в ремонтных помещениях, так и в комнате для  ожидания. </p>
+        <button class="rev-more" onclick="toggleRev(5, this)">Читать полностью</button>
+        <div class="rev-photos"><img src="https://avatars.mds.yandex.net/get-altay/18109934/2a0000019b69a7903084a8b8e4cdd1754a1c/M" alt="Фото из отзыва" loading="lazy"></div>
+      </article>
+      <article class="rev reveal">
+        <div class="rev-top">
+          <img class="rev-ava" src="https://avatars.mds.yandex.net/get-yapic/57243/0t-9/100x100" alt="Арсений Иванов" loading="lazy" onerror="this.style.visibility='hidden'">
+          <div>
+            <div class="rev-name">Арсений Иванов</div>
+            <div class="rev-meta">Знаток города 6 уровня · 26.12.2025</div>
+          </div>
+        </div>
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-text clamp" id="rt6">Ребята, красавчики! Быстро сделали адаптацию моих хотелок. Буду рекомендовать друзьям и приезжать к ним на обслуживание🤝.</p>
+        <button class="rev-more" onclick="toggleRev(6, this)">Читать полностью</button>
+        <div class="rev-photos"><img src="https://avatars.mds.yandex.net/get-altay/16416536/2a0000019b5a64698e7c14f0d9e5987d4fe0/M" alt="Фото из отзыва" loading="lazy"></div>
+      </article>
+      <article class="rev reveal">
+        <div class="rev-top">
+          <img class="rev-ava" src="https://avatars.mds.yandex.net/get-yapic/47747/pp6lzXkWAWtEx1l4EaySGCRAbE-1/100x100" alt="Ясный" loading="lazy" onerror="this.style.visibility='hidden'">
+          <div>
+            <div class="rev-name">Ясный</div>
+            <div class="rev-meta">Знаток города 8 уровня · 04.10.2026</div>
+          </div>
+        </div>
+        <div class="rev-stars">★☆☆☆☆</div>
+        <p class="rev-text clamp" id="rt7">Хотел купить машину и приехал в это место на осмотр перед покупкой, цена машины была ниже рынка, а состояние - топ. Очень хороший вариант для покупки. Пробег меньше 100 т.км. После осмотра, на ресепшене, южный гость нашего города (которому пора домой) и второй приемщик - добрый и наивный человек объяснили мне, что (!) из-за запотевания дроссельной заслонки на машине надо делать капиталку головы или турбины (запотевание является нормой на самом деле и ничего делать не требуется). Сказали, что покупать эту машину мне не надо. Посоветовали вместо вага купить Гранту (! что за бред!), якобы они сами на таких ездят... А на следующий день продавец перепродал машину дороже другим людям! Кому - я не знаю. Отзывы на 5 баллов у них купленные - так настоящие люди не пишут. Поищите другой сервис</p>
+        <button class="rev-more" onclick="toggleRev(7, this)">Читать полностью</button>
+        
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contacts">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="eyebrow">Как нас найти</div>
+        <h2>Контакты и карта</h2>
+      </div>
+      <p class="lead" style="margin:0">Мебельная ул., 2Б, Санкт-Петербург</p>
+    </div>
+    <div class="map-wrap reveal">
+      <iframe src="https://yandex.ru/map-widget/v1/?ol=biz&oid=228982282715&z=16&lang=ru_RU" allowfullscreen loading="lazy" title="VAG Club SPB на карте"></iframe>
+      <div class="contacts">
+        <h3>Телефоны</h3>
+        <div class="big"><a href="tel:+79955979000">+7 (995) 597-90-00</a><br><a href="tel:+79215979000">+7 (921) 597-90-00</a></div>
+        <h3>Адрес</h3>
+        <p>Санкт-Петербург, Мебельная улица, 2Б</p>
+        <h3>Часы работы</h3>
+        <p>пн-пт 10:00–20:00</p>
+        <h3>Мы на связи</h3>
+        <div class="socials">
+          <a href="https://t.me/vag_club_98" target="_blank" rel="noopener">Telegram</a><a href="https://vk.ru/vag_club_spb" target="_blank" rel="noopener">VK</a><a href="https://max.ru/id601101358739_biz" target="_blank" rel="noopener">MAX</a>
+        </div>
+        <div style="margin-top:26px"><button class="btn btn-primary" onclick="openModal()">Записаться</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta reveal">
+      <div>
+        <h2>Не откладывайте на «потом»</h2>
+        <p>Опишите проблему — подскажем по телефону, сколько будет стоить и сколько займёт.</p>
+      </div>
+      <button class="btn btn-primary" onclick="openModal()">Оставить заявку</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="logo" style="font-size:18px"><span class="logo-mark" style="width:28px;height:28px;font-size:12px">VW</span>VAG <b>CLUB</b> SPB</div>
+      <div>Мебельная ул., 2Б, Санкт-Петербург · пн-пт 10:00–20:00</div>
+      <div><a href="tel:+79955979000">+7 (995) 597-90-00</a> · <a href="tel:+79215979000">+7 (921) 597-90-00</a></div>
+    </div>
+    <p class="foot-note">© 2026 VAG Club SPB. Не является публичной офертой. Данные, фото и отзывы — из открытой карточки организации на Яндекс.Картах. Демонстрационный сайт.</p>
+  </div>
+</footer>
+
+<div class="overlay" id="ov" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="close" onclick="closeModal()">&times;</button>
+    <h3>Запись на сервис</h3>
+    <p>Оставьте номер — перезвоним в течение 15 минут и подберём время.</p>
+    <form onsubmit="event.preventDefault();this.reset();closeModal();alert('Заявка отправлена. Мы перезвоним.');">
+      <input type="text" placeholder="Ваше имя" required>
+      <input type="tel" placeholder="Телефон" required>
+      <input type="text" placeholder="Марка и модель автомобиля">
+      <select>
+        <option>ТО по регламенту</option>
+        <option>Диагностика</option>
+        <option>Ремонт двигателя</option>
+        <option>АКПП / DSG</option>
+        <option>Подвеска и тормоза</option>
+        <option>Другое</option>
+      </select>
+      <button class="btn btn-primary" type="submit">Записаться</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const hdr = document.getElementById('hdr');
+  addEventListener('scroll', () => hdr.classList.toggle('solid', scrollY > 40), { passive: true });
+
+  document.querySelectorAll('.tab').forEach(t => t.onclick = () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+    document.querySelectorAll('.pane').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+    document.querySelector('.pane[data-i="' + t.dataset.i + '"]').classList.add('on');
+  });
+
+  function toggleRev(i, btn) {
+    const p = document.getElementById('rt' + i);
+    const open = p.classList.toggle('clamp');
+    btn.textContent = open ? 'Читать полностью' : 'Свернуть';
+  }
+
+  const openModal = () => { document.getElementById('ov').classList.add('on'); document.body.style.overflow = 'hidden'; };
+  const closeModal = () => { document.getElementById('ov').classList.remove('on'); document.body.style.overflow = ''; };
+
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
